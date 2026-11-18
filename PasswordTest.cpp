@@ -44,6 +44,7 @@ TEST(PasswordTest, same_char_password)
 	int actual = my_password.count_leading_characters("PPPPP");
 	ASSERT_EQ(5, actual);
 }
+
 TEST(PasswordTest, hasUpperAndLower)
 {
 	Password my_password;
@@ -60,5 +61,29 @@ TEST(PasswordTest, hasOnlyLower)
 {
 	Password my_password;
 	int actual = my_password.has_mixed_case("password");
+	ASSERT_EQ(false, actual);
+}
+TEST(PasswordTest, haslowerThenUpperLast)
+{
+	Password my_password;
+	int actual = my_password.has_mixed_case("passworD");
+	ASSERT_EQ(true, actual);
+}
+TEST(PasswordTest, hasUpperFirstThenLower)
+{
+	Password my_password;
+	int actual = my_password.has_mixed_case("Password");
+	ASSERT_EQ(true, actual);
+}
+TEST(PasswordTest, emptyPassword)
+{
+	Password my_password;
+	int actual = my_password.has_mixed_case("");
+	ASSERT_EQ(false, actual);
+}
+TEST(PasswordTest, NoUpperNoLowerSymbolsOnly)
+{
+	Password my_password;
+	int actual = my_password.has_mixed_case("#@$!%^*");
 	ASSERT_EQ(false, actual);
 }
